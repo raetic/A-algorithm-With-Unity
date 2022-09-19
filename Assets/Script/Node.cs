@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour
+public class Node 
 {
     public bool canWalk;
     public Vector3 myPos;
@@ -10,7 +10,7 @@ public class Node : MonoBehaviour
     public int myY;
     public int gCost;
     public int hCost;
-    public int fcost;
+
     public Node par;
     public Node(bool walk,Vector3 pos,int X,int Y)
     {
@@ -18,6 +18,10 @@ public class Node : MonoBehaviour
        myPos = pos;
         myX = X;
         myY = Y;
+    }
+    public int fcost
+    {
+        get { return gCost + hCost; }
     }
    
 }

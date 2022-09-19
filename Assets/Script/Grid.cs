@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour
     int nodeCountX;
     int nodeCountY;
     [SerializeField] LayerMask obstacle;
+    public List<Node> path;
 
     private void Start()
     {
@@ -22,14 +23,15 @@ public class Grid : MonoBehaviour
             {
                 Vector3 pos = new Vector3(i * nodeSize, j * nodeSize);
                 Collider2D hit = Physics2D.OverlapBox(pos, new Vector2(nodeSize/2, nodeSize/2), 0, obstacle);
-                bool noHit = true;
-                if (hit == null)  noHit = false;
+                bool noHit = false;
+                if (hit == null)  noHit = true;
                 myNode[i, j] = new Node(noHit, pos,i,j);
             }
         }      
     }
     public List<Node> SearchNeightborNode(Node node)
     {
+        
         List<Node> nodeList = new List<Node>();
         for(int i = -1; i < 2; i++)
         {
@@ -55,17 +57,25 @@ public class Grid : MonoBehaviour
         int posY = Mathf.RoundToInt(vector.y / nodeSize);
         return myNode[posX,posY];
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, worldSize.y, 1));
-        if (myNode != null)
-        {
-            foreach(Node no in myNode)
-            {
-                Gizmos.color = (no.canWalk) ? Color.white : Color.red;
-                Gizmos.DrawCube(no.myPos, Vector3.one * (nodeSize/2));
-            }
-        }
-    }
-
+ private void OnDrawGizmos()
+      {
+          Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, worldSize.y, 1));
+          if (myNode != null)
+          {
+              foreach(Node no in myNode)
+              {
+                  Gizmos.color = (no.canWalk) ? Color.white : Color.red;
+                if (path != null)
+                {
+                    if (path.Contains(no))
+                    {
+                        Gizmos.color = Color.black;
+                    }
+                }
+                  Gizmos.DrawCube(no.myPos, Vector3.one * (nodeSize/2));
+              }
+          }
+      }
+    
+   
 }
