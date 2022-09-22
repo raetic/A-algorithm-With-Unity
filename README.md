@@ -1,5 +1,5 @@
 # A-algorithm-With-Unity
-유니티 엔진 내에서  A* 알고리즘을 구현한 공부용 토이 프로젝트입니다.
+유니티 엔진 내에서  A* 알고리즘을 구현한 개인 공부용 프로젝트입니다.
 <p>
 코드 리뷰,설명은 https://sharp2studio.tistory.com/43 에 업로드 해놓았습니다.
 
